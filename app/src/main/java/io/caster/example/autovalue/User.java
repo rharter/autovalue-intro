@@ -1,8 +1,9 @@
 package io.caster.example.autovalue;
 
+import android.os.Parcelable;
 import com.google.auto.value.AutoValue;
 
-@AutoValue public abstract class User {
+@AutoValue public abstract class User implements Parcelable {
   public abstract String salutation();
   public abstract String firstName();
   public abstract String lastName();
@@ -13,7 +14,9 @@ import com.google.auto.value.AutoValue;
     return firstName() + " " + lastName();
   }
 
-  public abstract Builder toBuilder();
+  public Builder toBuilder() {
+    return new AutoValue_User.Builder();
+  }
 
   public User with(int age) {
     return toBuilder().age(age).build();
